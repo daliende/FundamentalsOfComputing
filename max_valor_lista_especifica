@@ -1,0 +1,46 @@
+
+import simplegui
+
+# global state
+
+result = 0
+iteration = 0
+x_list = list()
+
+# helper functions
+
+def init(start):
+    """Initializes n."""
+    global result
+    result = start
+    print "Input is", result
+
+def get_next(current):
+    """si es par, devuelve el numero dividido entre dos y lo inserta con el indexado de iteration."""
+    """si es impar, devuelve el (numero*3)+1 lo inserta con el indexado de iteration."""
+    if current % 2 == 0:
+        x_list.insert(iteration,(current/2))
+        return current / 2
+    else:
+        x_list.insert(iteration,(current*3)+1)
+        return (current*3)+1
+ 
+def update():
+    """??? Part of mystery computation."""
+    global iteration, result
+    iteration += 1
+    # Stop iterating after max_iterations
+    if result == 1:
+        timer.stop()        
+        print "Output is", max(x_list)
+    else:
+        result = get_next(result)
+
+# register event handlers
+
+timer = simplegui.create_timer(1, update)
+
+# start program
+
+init(5)
+timer.start()
